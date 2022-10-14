@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express =  require("express")
 let app = express()
 const cors = require("cors")
@@ -11,7 +12,7 @@ const server = http.createServer(app)
 
 const io = new Server(server , {
     cors : {
-        origin : "http://localhost:3000",
+        origin : process.env.ORIGIN,
         methods : [ "GET" , "POST"]
     }
 })
@@ -36,6 +37,6 @@ io.on("connection" , (socket) => {
   })
 })
 
-server.listen(3001 , () =>{
-    console.log(`server running on 3001`);
+server.listen(process.env.PORT , () =>{
+    console.log(`server running on ${process.env.PORT}`);
 })
